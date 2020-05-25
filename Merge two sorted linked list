@@ -1,0 +1,60 @@
+class Node
+    {
+        int data;
+        Node next;
+        Node(int d) {data = d; next = null; }
+    }
+*/
+class LinkedList
+{
+    Node sortedMerge(Node headA, Node headB) {
+        if(headA == null)
+        return headB;
+        if(headB == null)
+        return headA;
+        
+        if(headA.data>headB.data)
+        return merge(headB,headA);
+        else
+        return merge(headA,headB);
+    
+   }
+   
+   Node merge(Node headA,Node headB)
+   {
+       if(headA.next == null)
+       {
+       headA.next = headB;
+       return headA;
+       }
+       Node curr1 = headA,curr2 = headB,next1 = headA.next,next2 = headB.next;
+       while(curr1!=null && curr2!=null)
+       {
+           if((curr2.data)>=(curr1.data) && (curr2.data) <= (next1.data))
+           {
+               next2 = curr2.next;
+               curr1.next = curr2;
+               curr2.next = next1;
+               curr1 = curr2;
+               curr2 = next2;
+               //next2 = curr2.next;
+              // next1 = curr1.next;
+           }
+           else
+           {
+               if(next1.next!=null)
+               {
+                   next1 = next1.next;
+                   curr1 = curr1.next;
+               }
+               else
+               {
+                   next1.next = curr2;
+                   return headA;
+               }
+           }
+           
+       }
+       return headA;
+   }
+}

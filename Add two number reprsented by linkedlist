@@ -1,0 +1,37 @@
+class Add {
+    
+    // This function will add the numbers represented by two linked lists
+    Node addTwoLists(Node first, Node second) {
+        Node curr = null;
+        Node reshead = null;
+        Node temp = null;
+        int sum = 0,carr =0;
+        while(first!=null || second!=null)
+        {
+            sum = carr + (first!=null?first.data:0) + (second!=null?second.data:0);
+            carr = sum/10;
+            sum = sum%10;
+            temp = new Node(sum);
+            
+            if(reshead == null)
+            reshead = temp;
+            else
+            curr.next = temp;
+            
+            curr = temp;
+            if(first!=null)
+            first = first.next;
+            if(second!=null)
+            second = second.next;
+            
+        }
+        if(carr>0)
+        {
+            temp = new Node(carr);
+            curr.next = temp;
+        }
+        return reshead;
+        
+        // Your code here
+    }
+}
